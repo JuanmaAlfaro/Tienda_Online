@@ -51,7 +51,7 @@ $id = $_SESSION['carrito'];
   <div class="responsive" columnas-iguales>  
   <?php include 'header.php'; ?>
   <div class="info">
-	  <img src="<?php echo $src; ?>">
+	  <img src="<?php echo $src;?>" id="img01" class="imagen1">
 	  <h2><?php echo $nombre; ?></h2><br>
 	  <h3><?php echo $desc; ?></h3><br>
 	  <h3>$ <?php echo $precio; ?></h3><br>
@@ -62,11 +62,11 @@ $id = $_SESSION['carrito'];
 
 	   <h3>Cantidad </h3>
 	   <input type="number" id="cantidad" value="1" name="cantidad" min="1" max="<?php echo $stock; ?>"><br>
-	   <br><h3>Talla</h3>
+	   <br><br><h3>Talla</h3>
 	   <input type="radio" name="talla" value="1">S &nbsp; &nbsp;
 	   <input type="radio" name="talla" value="2" checked>M &nbsp; &nbsp;
 	   <input type="radio" name="talla" value="3">L &nbsp; &nbsp;
-	   <input type="radio" name="talla" value="4">XL<br><br>
+	   <input type="radio" name="talla" value="4">XL<br><br><br>
 	   <div class="btn-rojo">
 	      <input type="submit" name="btn-carrito" value="Añadir al Carrito" class="btn-rojo">
 	   </div>
@@ -81,11 +81,21 @@ $id = $_SESSION['carrito'];
    	 	font-size: 22px;
    	 	color: #A10235;
    	 }
-   	 .info > img{
+   	 .imagen1{
    	 	width: 250px;
-   	 	height: 250px;
+   	 	height: 250px;	
    	 	object-fit: cover;
+		cursor:zoom-in;
+		transition: 0.5s;	
    	 }
+	 .imagen2{
+		width: 530px;
+   	 	height: 530px;		
+   	 	object-fit: cover;
+		cursor:zoom-out;
+		position:absolute;
+			
+	 }	
    	 .form{
    	 	padding-top: 40px;
    	 	padding-left: 800px;
@@ -94,7 +104,7 @@ $id = $_SESSION['carrito'];
    	 }
    	 .form > input{
    	 	width: 80px;
-   	 	height: 20px;
+   	 	height: 25px;
    	 }
    	 .btn-rojo{
    	 	width:180px;
@@ -106,7 +116,16 @@ $id = $_SESSION['carrito'];
 	    cursor: pointer;
    	 }
    	 
-   </style>		
+   </style>
+   <!-- JavaScript Libre 1 -->
+   <script>
+	function zoom (){
+		document.getElementById('img01').classList.toggle("imagen2");
+	}
+	document.getElementById('img01').onclick = function(){
+		zoom();
+	};
+   </script>		
   <?php 
   //echo $idProducto;
   }

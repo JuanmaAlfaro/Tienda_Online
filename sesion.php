@@ -25,18 +25,39 @@
 
 	?>
 
-	<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" class="formulario-sesion" name="form-sesion" method="POST">
+	<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" class="formulario-sesion" name="form-sesion" method="POST" onsubmit="return validar();">
 		<img class="imagen-user" src="img/user.png" ><br>
 		<h1 >Iniciar Sesión</h1>
 		<label for="correo">Correo Electronico</label><br>
-		<input type="email" name="correo" id="correo" placeholder="Ingresa tu correo">
-		<img src="img/user2.png" alt="usuario"><br>
+		<input type="email" name="correo" id="correo" placeholder="Ingresa tu correo" required>
+		<img src="img/user2.png" alt="usuario" id="img01"><br>
 		<label for="password">Contraseña</label><br>
-		<input  type="password" name="password" id="password" placeholder="Ingresa tu Contraseña">
-		<img src="img/pass.png" alt="contraseña"><br><br>
+		<input  type="password" name="password" id="password" placeholder="Ingresa tu Contraseña" required>
+		<img src="img/pass.png" alt="contraseña" id="img02"><br><br>
 		<input class="icono-sesion" type="submit" name="boton" value="Iniciar Sesión"><br>
 		<a href="crearcuenta2.php">¿No tienes cuenta? Haz Click para crear una</a>
+	    
+		<script>
+		  function validar(){
+			var correo,password,expresion;
+			correo = document.getElementById("correo").value;
+			password = document.getElementById("password").value;  
+			expresion = /\w+@\w+\.+[a-z]/;
 
+			if(correo === ""){
+				alert("Olvidaste ingresar tu correo electronico.");
+				return false; 
+			}
+			else if(!expresion.test(correo)){
+				alert("Correo no valido."); 
+				return false;
+			}
+			else if(password === ""){
+				alert("Olvidaste ingresar tu contraseña.");
+				return false;
+			}
+		  }
+		</script>
 		<?php include 'conexion.php'; //conectar a la BD ?>
 			   <?php
 			   //Validar	
@@ -44,21 +65,12 @@
 				if(isset($_POST['boton'])){
 					$enviar = true;
 					if(empty($correo)){?>
-						<script type="text/javascript">
-						  alert("Olvidaste ingresar tu correo electronico."); 
-						</script>
 				    <?php $enviar = false;
 					}
 					elseif(!filter_var($correo, FILTER_VALIDATE_EMAIL)){?>
-						<script type="text/javascript">
-						  alert("Correo no valido."); 
-						</script>
 					<?php $enviar = false;
 					}
 					if(empty($password)){ ?>
-						<script type="text/javascript">
-						  alert("Olvidaste ingresar tu contraseña."); 
-						</script>
 					<?php	$enviar = false;
 					}
 				}
@@ -99,6 +111,27 @@
 			  ?>
 
 	</form>
+	<!-- JavaScript Libre 2 -->
+	<script>
+		var usuario = document.getElementById('correo');
+		var password = document.getElementById('password');
+		var img01 = document.getElementById('img01');
+		var img02 = document.getElementById('img02');
+
+		usuario.addEventListener("focus",function(){
+			img01.setAttribute("src", "img/user3.png");
+		});
+		usuario.addEventListener("focusout",function(){
+			img01.setAttribute("src", "img/user2.png");
+		});
+
+		password.addEventListener("focus",function(){
+			img02.setAttribute("src", "img/pass2.png");
+		});
+		password.addEventListener("focusout",function(){
+			img02.setAttribute("src", "img/pass.png");
+		});
+	</script>
 	<br><br><br>
 	<?php include 'footer.php'; ?>
 	</div>

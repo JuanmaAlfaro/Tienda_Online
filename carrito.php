@@ -24,43 +24,51 @@
   if($filas>0){
   	$i = 0;
   	$suma = 0;?>
-
-  	<div class="encabezado">
-  	<?php echo "No."."&nbsp;&nbsp;&nbsp;&nbsp;";
-    echo "Producto"."&nbsp;&nbsp;&nbsp;&nbsp;";
-    echo "Precio Unitario"."&nbsp;&nbsp;&nbsp;&nbsp;";
-    echo "Cantidad"."&nbsp;&nbsp&nbsp;&nbsp;"; 
-    echo "Precio total"."<br><br>";?>
-    </div>
-    
-  <?php
-  while($row = mysqli_fetch_assoc($ejecutar)){
-  		$cantidad = $row['cantidad'];
-  		$producto = $row['id_producto'];
-  		$sql2 = "SELECT nombre, precio, imagen,almacen FROM producto WHERE id = '$producto'";
-    	$ejecutar2 = mysqli_query($con,$sql2);
-    	$row2 = $ejecutar2->fetch_assoc();
-    	$precio = $row2['precio'];
-    	$nombre = $row2['nombre'];
-    	$imagen = $row2['imagen'];
-    	$stock = $row2;
-    	$arreglo[$i]['idProducto'] = $producto;
-    	$arreglo[$i]['precio'] = $precio;
-    	$arreglo[$i]['cantidad'] = $cantidad;
-    	$tot = $cantidad * $precio;
-    	$suma += $tot; 
-    	$i++;
-    	?>
-    	<div class="info">
-	    	<?php echo $i; ?> &nbsp; &nbsp;&nbsp; &nbsp;
-	    	<?php echo $nombre; ?>&nbsp; &nbsp;&nbsp; &nbsp;
-	    	$<?php echo $precio; ?> &nbsp; &nbsp;&nbsp; &nbsp;
-	    	<?php echo $cantidad; ?>&nbsp; &nbsp;&nbsp; &nbsp;
-	    	$<?php echo $tot; ?>
-        </div>
+	<table>
+	   <thead>
+				<tr class="encabezado">
+					<th>No.</th>
+					<th>Producto</th>
+					<th>Precio</th>
+					<th>Cantidad</th>
+					<th>Precio Total</th>
+					<th>Quitar del carrito</th>
+				</tr>
+		</thead>	
+       <tbody>    
+			<?php while($row = mysqli_fetch_assoc($ejecutar)){
+					$id_carrito = $row['id'];
+					$cantidad = $row['cantidad'];
+					$producto = $row['id_producto'];
+					$sql2 = "SELECT nombre, precio, imagen,almacen FROM producto WHERE id = '$producto'";
+					$ejecutar2 = mysqli_query($con,$sql2);
+					$row2 = $ejecutar2->fetch_assoc();
+					$precio = $row2['precio'];
+					$nombre = $row2['nombre'];
+					$imagen = $row2['imagen'];
+					$stock = $row2;
+					$arreglo[$i]['idProducto'] = $producto;
+					$arreglo[$i]['precio'] = $precio;
+					$arreglo[$i]['cantidad'] = $cantidad;
+					$tot = $cantidad * $precio;
+					$suma += $tot; 
+					$i++;
+					?>
+					<tr class=info>
+							<td><?php echo $i; ?></td> 
+							<td><?php echo $nombre; ?></td>
+							<td>$<?php echo $precio; ?></td>
+							<td><?php echo $cantidad; ?></td>
+							<td>$<?php echo $tot; ?></td>
+							<td>
+							  <a href="eliminar_carrito.php?id=<?php echo $id_carrito; ?>">
+							  <img src="img/eliminar2.png"></a>	
+							</td>
+						</tr>
+						<?php	}?>			
+	   </tbody>
+	</table>
     	<br>
-      <?php	
-  	  }?>
   	 <div class="total"> 
   	 	<?php echo "<br>Total a Pagar: $".$suma;?><br><br> 
   	 </div>
@@ -80,14 +88,16 @@
 	    text-align: center;
 	    cursor: pointer;
 	}
-	.info{
+	.info>td{
 		padding-left: 50px;
 		font-size: 18px;
+		text-align:center;
 	}
-	.encabezado{
+	.encabezado>th{
 		padding-left: 50px; 
 		font-size: 24px;
 		color: #A10235;
+		text-align:center;
 	}
 	.total{
 		padding-left: 50px;

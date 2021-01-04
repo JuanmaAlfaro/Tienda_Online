@@ -49,18 +49,30 @@
 			<section class="contenedor sobre-nosotros">
 				<h2 class="titulo">Jerseys 2020-2021</h2>
 				<div class="contenedor-sobre-nosotros">
-					<div class="slider">
-						<ul>
-							<li><img src="img/nuestros_productos.jpeg" alt=""></li>
-							<li><img src="img/uniformes.jpg" alt="" ></li>
-						</ul>
+					<div id="c-slider">
+						<div id="slider">
+	 						<section>
+								<img src="img/nuestros_productos.jpeg" alt="">
+							</section>
+							<section>
+								<img src="img/uniformes.jpg" alt="">
+							</section>
+							<section>
+								<img src="img/uniformes3.jpeg" alt="">
+							</section>
+							<section>
+								<img src="img/uniformes5.jpg" alt="">
+							</section>
+						</div>
+						<div id="btn-prev">&#60;</div>
+						<div id="btn-next">&#62;</div>
 					</div>	
 				<div class="contenido-textos">
 						<br><br><h2 class="titulo">Nuestros Productos</h2>
 						<h3><span>1</span> Calzado, Ropa y Accesorios Deportivos </h3>
 						<p>Con tan solo unos cuantos clicks encuentra el Calzado deportivo que estas buscando para cualquier deporte, además de todas las prendas que necesitas para entrenar y los mejores accesorios deportivos todo a los mejores precios del mercado, recibelo en la puerta de tu casa.</p>
 						<br><h3><span>2</span> Jerseys</h3>
-						<p>Encuentra el jersey de tu equipo favorito, tenemos los mejores y nuevos jerseys de los mejroes equipos de Futbol, Basketball, Baseball y Futbol Americano. En DECARTON podras encontrar jerseys de las mejores ligas del mundo(La Liga, Serie A, Premier League, Ligue 1, Bundesliga, Liga MX, MLB, NBA,NFL, entre otras.</p> 
+						<p>Encuentra el jersey de tu equipo favorito, tenemos los mejores y nuevos jerseys de los mejroes equipos de Futbol, Basketball, Baseball y Futbol Americano. En DECARTON podras encontrar jerseys de las mejores ligas del mundo(La Liga, Serie A, Premier League, Ligue 1, Bundesliga, Liga MX, MLB, NBA,NFL, entre otras).</p> 
 				</div>
 			</div>
 		</section>
@@ -167,9 +179,9 @@
 					<h2 class="titulo">Más Información</h2>
 					<div class="informacion-cont">
 						<div class="Redes">
-							<a href="https://www.facebook.com/" target="_blank"><img src="img/facebook2.png" alt="Facebook">
-							<a href="https://www.instagram.com/" target="_blank"><img src="img/instagram2.png" alt="Instagram"></a>
-							<a href="https://www.youtube.com/" target="_blank"><img src="img/youtube2.png" alt="YouTube"></a>
+							<a href="https://www.facebook.com/" target="_blank"><img src="img/facebook2.png" alt="Facebook" id="img01">
+							<a href="https://www.instagram.com/" target="_blank"><img src="img/instagram2.png" alt="Instagram" id="img02"></a>
+							<a href="https://www.youtube.com/" target="_blank"><img src="img/youtube2.png" alt="YouTube" id="img03"></a>
 							<h3>Nuestras Redes</h3>
 							<p>Visitanos en nuestras redes sociales</p>
 						</div>
@@ -187,8 +199,93 @@
 				</div>
 			</section>
 	</main>
+	<!-- JavaScript Libre 3-->
+	<script>
+		var img01 = document.getElementById("img01");//facebook
+		var img02 = document.getElementById("img02");//instagram
+		var img03 = document.getElementById("img03");//YouTube
+		 
+		//facebook
+		img01.addEventListener("mouseover",function(){
+			img01.setAttribute("src", "img/facebook.png");
+		});
+		img01.addEventListener("mouseout",function(){
+			img01.setAttribute("src", "img/facebook2.png");
+		});
+
+		//instagram
+		img02.addEventListener("mouseover",function(){
+			img02.setAttribute("src", "img/instagram.png");
+		});
+		img02.addEventListener("mouseout",function(){
+			img02.setAttribute("src", "img/instagram2.png");
+		});
+
+		//YouTube
+		img03.addEventListener("mouseover",function(){
+			img03.setAttribute("src", "img/youtube.png");
+		});
+		img03.addEventListener("mouseout",function(){
+			img03.setAttribute("src", "img/youtube2.png");
+		});
+	</script>
 		<br><br>
 		<?php include 'footer.php'; ?>
-	</div>	
+	</div>
+	<style type="text/css">
+		#c-slider{
+			margin:auto;
+			width:90%;
+			max-width:780px;
+			position:relative;
+			overflow:hidden;
+			box-shadow:0 0 0 10px #fff,
+					   0 15px 50px;
+		}
+		#slider{
+			display:flex;
+			width:400%;
+		}
+		#slider section{
+			width:100%;
+		}
+		#slider img{
+			display:block;
+			width:780px;
+			height:410px;
+			object-fit: cover;
+		
+		}
+		#btn-prev, #btn-next{
+			width:40px;
+			height:40px;
+			background:rgba(255,255,255,0.6);
+			color:#000;
+			position:absolute;
+			top:50%;
+			transform: translateY(-50%);
+			line-height:40px;
+			font-size:30px;
+			font-weight:bold;
+			text-align:center;
+			border-radius:50%;
+			cursor:pointer;
+		}
+		#btn-prev:hover, #btn-next:hover{ 
+			background:rgba(255,255,255,1);	
+		}
+
+		#btn-prev{
+			left:10px;
+		}
+		#btn-next{
+			right:10px;
+		}
+	</style>	
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js" 
+	 	integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" 
+		crossorigin="anonymous">
+	</script>
+	<script src="app.js"></script>
 </body>
 </html>

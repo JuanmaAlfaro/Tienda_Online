@@ -30,28 +30,30 @@
 		<img class="imagen-user" src="img/user.png" ><br>
 		<h1 >Unete a DECARTON</h1>
 
-		<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" name="formulario" method="POST">
+		<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" name="formulario" method="POST" onsubmit="return validar();">
 
 			<label for="nombre">Nombre</label><br>
-			<input type="text" name="nombre" id="nombre" placeholder="Ingresa tu Nombre(s)" value="<?php if(isset($nombre)){ echo $nombre;} ?>"><br>
+			<input type="text" name="nombre" id="nombre" placeholder="Ingresa tu Nombre(s)" value="<?php if(isset($nombre)){ echo $nombre;} ?> " required><br>
 
 			<label for="apellido">Apellido</label><br>
-			<input type="text" name="apellido" id="apellido" placeholder="Ingresa tu Apellido(s)" value="<?php if(isset($apellido)){ echo $apellido;} ?>"><br>
+			<input type="text" name="apellido" id="apellido" placeholder="Ingresa tu Apellido(s)" value="<?php if(isset($apellido)){ echo $apellido;} ?>" required><br>
 
 			<label for="correo">Correo Electronico</label><br>
-			<input type="email" name="correo" id="correo" placeholder="Ingresa tu Correo Electronico" value="<?php if(isset($correo)) {echo $correo;} ?>"><br>
+			<input type="email" name="correo" id="correo" placeholder="Ingresa tu Correo Electronico" value="<?php if(isset($correo)) {echo $correo;} ?>" required><br>
 
 			<label for="password">Contraseña</label><br>
-			<input  type="password" name="password" id="password" placeholder="Crea tu Contraseña">
+			<input  type="password" name="password" id="password" placeholder="Crea tu Contraseña" required>
 
 			<label for="password2">Confirmar Contraseña</label><br>
-			<input  type="password" name="password2" id="password2" placeholder="Ingresa tu Contraseña de nuevo">
+			<input  type="password" name="password2" id="password2" placeholder="Ingresa tu Contraseña de nuevo" required>
 			<br><br>
-			<label>Acepto terminos y condiciones.<input type="checkbox" id="terminos" name="terminos" value="check"></label><br>
-			<input class="icono-sesion" type="submit" name="boton" value="Crear Cuenta"><br>
-	
+			<label>Acepto terminos y condiciones.<input type="checkbox" id="terminos" name="terminos" value="check" required></label><br>
+			<input class="icono-sesion" type="submit" name="boton" id="btn-crear" value="Crear Cuenta"><br>
+				   
+			<script src="validar_JS.js" type="text/javascript"></script>
 			   <?php include 'conexion.php'; ?>
 			   <?php	
+
 			   include 'validar.php';
 			   	if($enviar){
 			   		$sql= "INSERT INTO cliente VALUES (NULL,'$nombre','$apellido','$correo','$password',CURRENT_TIMESTAMP)";	

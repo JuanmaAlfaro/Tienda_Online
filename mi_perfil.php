@@ -26,7 +26,10 @@
 		</script>
 	<?php 	
 	}
-  ?>
+	if(isset($_POST['boton2'])){
+		header('Location:historial.php');	 
+	}?>
+
   <?php include 'conexion.php';  
   	//echo $varsesion;
   	//echo $varid;
@@ -53,7 +56,7 @@
 		  <br><h2><center><?php echo $nombre; ?></center></h2><br><br>
 		  <h3>Numero de cliente: #<?php echo $id; ?></h3><br>
 		  <h3>Correo Electronico: <?php echo $correo ?></h3><br>
-		  <h3>Contraseña: <?php echo $pass; ?></h3><br><br>
+		  <h3>Contraseña:</h3><input type="password" value="<?php echo $pass; ?>" disabled><br><br>
 		  <h3>Te has unido el: <?php echo $fecha; ?></h3><br>
 	</div><br>
 <!--</div>-->
